@@ -51,15 +51,15 @@ pipeline {
         }
 
         stage('Run Playwright Tests') {
-            steps {
-                dir('playwright') {
-                    sh '''
-                        echo "SIKULI_DIR = $SIKULI_DIR"
-                        npx playwright test --headed
-                    '''
-                }
-            }
+    steps {
+        dir('playwright') {
+            sh '''
+                echo "SIKULI_DIR = $SIKULI_DIR"
+                xvfb-run --auto-servernum npx playwright test --headed
+            '''
         }
+    }
+}
     }
 
     post {
