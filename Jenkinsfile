@@ -38,6 +38,14 @@ pipeline {
             }
         }
 
+        stage('Install Java Web Start') {
+            steps {
+                sh '''
+                    apt-get update && apt-get install -y icedtea-netx
+                '''
+            }
+        }
+
         stage('Install Playwright Dependencies') {
             steps {
                 dir('playwright') {
