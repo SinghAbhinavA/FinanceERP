@@ -4,6 +4,7 @@ pipeline {
 
     environment {
         DISPLAY = ':0'
+        SIKULI_DIR = "${WORKSPACE}/JNLP.sikuli"
     }
 
     stages {
@@ -12,6 +13,16 @@ pipeline {
             steps {
                 git branch: 'main',
                 url: 'https://github.com/SinghAbhinavA/FinanceERP.git'
+            }
+        }
+
+        stage('Verify Sikuli Folder') {
+            steps {
+                sh '''
+                    echo "Workspace: $WORKSPACE"
+                    ls -la $WORKSPACE
+                    ls -la $WORKSPACE/JNLP.sikuli || echo "JNLP.sikuli NOT FOUND"
+                '''
             }
         }
 
@@ -26,7 +37,7 @@ pipeline {
         stage('Install Browsers') {
             steps {
                 dir('playwright') {
-                    sh 'npx playwright install'
+                    sh 'npx playwright install --with-deps'
                 }
             }
         }
@@ -42,7 +53,10 @@ pipeline {
         stage('Run Playwright Tests') {
             steps {
                 dir('playwright') {
-                    sh 'npx playwright test --headed'
+                    sh '''
+                        echo "SIKULI_DIR = $SIKULI_DIR"
+                        npx playwright test --headed
+                    '''
                 }
             }
         }
@@ -51,7 +65,7 @@ pipeline {
     post {
 
         always {
-            archiveArtifacts artifacts: 'playwright/playwright-report/**'
+            archiveArtifacts artifacts: 'playwright/playwright-report/**', allowEmptyArchive: true
         }
 
         failure {

@@ -29,7 +29,7 @@ module.exports = defineConfig({
 
   use: {
     // Headless in CI, headed locally for debugging
-    headless: !!process.env.CI,
+   headless: process.env.CI ? true : false,
 
     baseURL: process.env.BASE_URL || '',
 

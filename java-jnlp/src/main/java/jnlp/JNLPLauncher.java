@@ -15,7 +15,9 @@ import java.io.BufferedReader;
 
 public class JNLPLauncher {
 
-    private static final String DEFAULT_SIKULI_DIR = "/home/developer/JNLP.sikuli";
+    private static final String DEFAULT_SIKULI_DIR =
+        System.getenv().getOrDefault("SIKULI_DIR",
+        System.getProperty("user.dir") + "/JNLP.sikuli");
     private static final String JAVAWS_PATH = "/usr/bin/javaws";
     private final Screen screen = new Screen();
 

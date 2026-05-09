@@ -1,0 +1,32 @@
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp codebase='https://staging.medplusindia.com:945/medplus-login'>
+   <information>
+      <title>Medplus Login</title>
+      <vendor>Medplus</vendor>
+      <description>A process to login to medplus subsystems.</description>
+   </information>
+   <security>
+      <all-permissions />
+   </security>
+   <update check="always" policy="always"/>
+   <resources>
+      <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se" />  
+      <jar href="commons-codec.jar" />
+      <jar href="json-simple.jar" />
+      <jar href="medplussecurity.jar" />
+      <jar href="netscape.jar" />
+      <jar href="printapplet.jar" />
+      <jar href="Java-WebSocket.jar" />
+      <jar href="slf4j-api.jar" />
+      <jar href="medplus-login.jar" main="true" />
+   </resources>
+   <application-desc main-class="com.medplus.login.app.LoginApp">
+      <argument>https://staging.medplusindia.com:4154/ums</argument>
+      <argument>https://staging.medplusindia.com:945/cas</argument>
+      <argument>https://staging.medplusindia.com:4354/finance-erp/login/cas</argument>
+      <argument>59557</argument>
+      <argument>dispatch,finance-erp,grn,transfers-new,procurement,purchase,db-report,marketing,optical-warehouse,warehouse-dashboard,saletargetcharts,store-mis,purchase-return-management,asset-management,medplus-dmm,purchase-proposals</argument>
+   </application-desc>
+</jnlp>
