@@ -25,6 +25,14 @@ module.exports = {
     jnlpJarPath: process.env.JNLP_JAR_PATH ||
         path.resolve(__dirname, '../../java-jnlp/target/jnlp-runner-1.0.jar'),
 
-    jnlpFilePath: process.env.JNLP_FILE_PATH ||
-        path.join(os.homedir(), 'Downloads/app.jnlp'),
+    jnlpFilePath:
+    process.env.JNLP_FILE_PATH ||
+    path.join(os.homedir(),
+        'FinanceERP',
+        'JNLP.sikuli',
+        'medplusLoginJnlp(1309).jnlp'),
+
+    sikuliDir:
+        process.env.SIKULI_DIR ||
+        path.join(os.homedir(), 'FinanceERP/JNLP.sikuli'),
 };
