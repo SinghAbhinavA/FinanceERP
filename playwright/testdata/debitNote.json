@@ -1,0 +1,44 @@
+{
+  "valid": [
+    {
+      "testCase": "Valid Debit Note - GST Partner",
+      "data": {
+        "accountType": "Partner",
+        "servicePartner": "7443",
+        "invoiceNumber": "OTGBS2700000086",
+        "debitNoteType": "GST Debit Note",
+        "category": ""
+      },
+      "expected": "success",
+      "tags": ["@smoke", "@regression"]
+    }
+  ],
+  "invalid": [
+    {
+      "testCase": "Missing Invoice Number",
+      "data": {
+        "accountType": "Partner",
+        "servicePartner": "7443",
+        "invoiceNumber": "",
+        "debitNoteType": "GST Debit Note",
+        "category": ""
+      },
+      "expected": "error",
+      "errorMessage": "",
+      "tags": ["@negative", "@regression"]
+    },
+    {
+      "testCase": "Missing Service Partner",
+      "data": {
+        "accountType": "Partner",
+        "servicePartner": "",
+        "invoiceNumber": "OTGBS2700000086",
+        "debitNoteType": "GST Debit Note",
+        "category": ""
+      },
+      "expected": "error",
+      "errorMessage": "",
+      "tags": ["@negative", "@regression"]
+    }
+  ]
+}

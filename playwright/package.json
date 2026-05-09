@@ -1,0 +1,25 @@
+{
+  "name": "jnlp-playwright",
+  "version": "1.0.0",
+  "private": true,
+ "scripts": {
+  "test": "playwright test",
+
+  "smoke": "TAG=@smoke playwright test",
+  "regression": "TAG=@regression playwright test",
+
+  "allure:generate": "npx allure generate ./allure-results --clean",
+  "allure:open": "npx allure open ./allure-report",
+
+  "smoke:allure": "npm run smoke || true && allure generate ./allure-results --clean --single-file && allure open ./allure-report",
+  "regression:allure": "npm run regression || true; npm run allure:generate; npm run allure:open"
+},
+  "devDependencies": {
+    "@playwright/test": "^1.59.1",
+    "allure-commandline": "^2.38.1",
+    "allure-playwright": "^3.7.1"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2"
+  }
+}

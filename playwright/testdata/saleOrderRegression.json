@@ -1,0 +1,92 @@
+{
+  "valid": [
+    {
+      "testCase": "Valid SO - Basic Order",
+      "data": {
+        "state": "TG",
+        "segment": "Retail",
+        "billingLocation": "INAPHYD00384",
+        "accountType": "Partner",
+        "servicePartner": "7443",
+        "division": "Pharma",
+        "postingProfile": "IC_Exp pay",
+        "postingDate": "2026-05-04",
+        "employee": "MED0111165",
+        "vehicle": "AP",
+        "serviceId": "PROD001S",
+        "locationId": "INAPHYD00384",
+        "quantity": "1",
+        "rate": "1000"
+      },
+      "expected": "success",
+      "tags": ["@smoke", "@regression"]
+    },
+    {
+      "testCase": "Valid SO - Different Quantity",
+      "data": {
+        "state": "TG",
+        "segment": "Retail",
+        "billingLocation": "INAPHYD00384",
+        "accountType": "Partner",
+        "servicePartner": "7443",
+        "division": "Pharma",
+        "postingProfile": "IC_Exp pay",
+        "postingDate": "2026-05-05",
+        "employee": "MED0111165",
+        "vehicle": "AP",
+        "serviceId": "PROD001S",
+        "locationId": "INAPHYD00384",
+        "quantity": "5",
+        "rate": "150"
+      },
+      "expected": "success",
+      "tags": ["@regression"]
+    }
+  ],
+  "invalid": [
+    {
+      "testCase": "Missing State",
+      "data": {
+        "state": "",
+        "segment": "Retail",
+        "billingLocation": "INAPHYD00384",
+        "accountType": "Partner",
+        "servicePartner": "7443",
+        "division": "Pharma",
+        "postingProfile": "IC_Exp pay",
+        "postingDate": "2026-05-04",
+        "employee": "MED0111165",
+        "vehicle": "AP",
+        "serviceId": "PROD001S",
+        "locationId": "INAPHYD00384",
+        "quantity": "1",
+        "rate": "1000"
+      },
+      "expected": "error",
+      "errorMessage": "",
+      "tags": ["@negative", "@regression"]
+    },
+    {
+      "testCase": "Missing Product",
+      "data": {
+        "state": "TG",
+        "segment": "Retail",
+        "billingLocation": "INAPHYD00384",
+        "accountType": "Partner",
+        "servicePartner": "7443",
+        "division": "Pharma",
+        "postingProfile": "IC_Exp pay",
+        "postingDate": "2026-05-04",
+        "employee": "MED0111165",
+        "vehicle": "AP",
+        "serviceId": "",
+        "locationId": "INAPHYD00384",
+        "quantity": "1",
+        "rate": "1000"
+      },
+      "expected": "error",
+      "errorMessage": "",
+      "tags": ["@negative", "@regression"]
+    }
+  ]
+}

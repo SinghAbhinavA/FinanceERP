@@ -1,0 +1,13 @@
+{
+  "name": "finance-erp",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "test": "npm --prefix playwright test",
+    "install:playwright": "npm --prefix playwright install",
+    "build:java": "mvn -f java-jnlp/pom.xml package -q"
+  },
+  "dependencies": {
+    "@cucumber/cucumber": "^12.8.2"
+  }
+}
