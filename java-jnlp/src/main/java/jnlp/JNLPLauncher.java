@@ -21,8 +21,9 @@ private static final String DEFAULT_SIKULI_DIR =System.getenv("SIKULI_DIR");
 
     public static void main(String[] args) {
         try {
-            System.out.println("🚀 Starting JNLP Flow...");
-
+           System.out.println("🚀 Starting JNLP Flow...");
+           System.out.println("DISPLAY = " + System.getenv("DISPLAY"));
+           System.out.println("JAVA_HOME = " + System.getenv("JAVA_HOME"));
             String jnlpPath = (args.length > 0 && args[0] != null && !args[0].trim().isEmpty())
                     ? args[0]
                     : System.getProperty("user.home") + "/Downloads/medplusLoginJnlp(1257).jnlp";

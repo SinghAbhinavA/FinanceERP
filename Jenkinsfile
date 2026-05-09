@@ -86,6 +86,7 @@ pipeline {
         stage('Run Playwright Tests') {
             steps {
                 dir('playwright') {
+
                     sh '''
                         echo "=============================="
                         echo "JAVA_HOME=$JAVA_HOME"
@@ -97,8 +98,29 @@ pipeline {
                           --auto-servernum \
                           --server-args="-screen 0 1920x1080x24" \
                           bash -c '
-                              echo "DISPLAY INSIDE XVFB=$DISPLAY"
+
+                              echo "=============================="
+                              echo "INSIDE XVFB"
+                              echo "=============================="
+
+                              echo "DISPLAY=$DISPLAY"
+
+                              echo "=============================="
+                              echo "ENV DISPLAY VARIABLES"
+                              echo "=============================="
+
+                              env | grep DISPLAY || true
+
+                              echo "=============================="
+                              echo "JAVA VERSION"
+                              echo "=============================="
+
                               java -version
+
+                              echo "=============================="
+                              echo "RUNNING PLAYWRIGHT"
+                              echo "=============================="
+
                               npx playwright test --headed
                           '
                     '''
@@ -110,9 +132,12 @@ pipeline {
     post {
 
         always {
-            archiveArtifacts artifacts: 'playwright/playwright-report/**', allowEmptyArchive: true
 
-            archiveArtifacts artifacts: 'playwright/test-results/**', allowEmptyArchive: true
+            archiveArtifacts artifacts: 'playwright/playwright-report/**',
+                             allowEmptyArchive: true
+
+            archiveArtifacts artifacts: 'playwright/test-results/**',
+                             allowEmptyArchive: true
         }
 
         failure {
