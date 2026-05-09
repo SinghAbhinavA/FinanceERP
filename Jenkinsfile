@@ -5,6 +5,8 @@ pipeline {
     environment {
         DISPLAY = ':0'
         SIKULI_DIR = "${WORKSPACE}/JNLP.sikuli"
+        JAVA_HOME = '/usr/lib/jvm/java-21-openjdk-amd64'
+        PATH = "${JAVA_HOME}/bin:${PATH}"
     }
 
     stages {
@@ -13,6 +15,16 @@ pipeline {
             steps {
                 git branch: 'main',
                 url: 'https://github.com/SinghAbhinavA/FinanceERP.git'
+            }
+        }
+
+        stage('Verify Java & Maven') {
+            steps {
+                sh '''
+                    echo "JAVA_HOME=$JAVA_HOME"
+                    java -version
+                    mvn -v
+                '''
             }
         }
 
