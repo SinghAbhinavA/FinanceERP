@@ -1,24 +1,48 @@
+# =========================
+# Node / Playwright
+# =========================
 
-# Playwright
 node_modules/
-/test-results/
-/playwright-report/
-/blob-report/
-/playwright/.cache/
-/playwright/.auth/
+playwright/node_modules/
 
-# Secrets - never commit these
+test-results/
+playwright-report/
+blob-report/
+allure-results/
+allure-report/
+
+playwright/.cache/
+playwright/.auth/
+
+# =========================
+# Environment / Secrets
+# =========================
+
 .env
 playwright/url.txt
 
-# Noise / JVM crash dumps
+# =========================
+# Logs
+# =========================
+
+*.log
 playwright/hs_err_pid*.log
 playwright/test_output.log
-node_modules/
-playwright/node_modules/
-playwright-report/
-allure-results/
-allure-report/
-test-results/
-.env
-*.log
+
+# =========================
+# Java / Maven
+# =========================
+
+target/
+*.jar
+*.war
+*.class
+
+# =========================
+# OS / IDE
+# =========================
+
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
