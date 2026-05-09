@@ -37,7 +37,8 @@ class JnlpHelper {
 
             // Pass urlFile as second arg so JNLPLauncher writes captured URL to the exact path we poll
             const command = `java -jar "${config.jnlpJarPath}" "${config.jnlpFilePath}" "${urlFile}"`;
-            const child = exec(command, { env: process.env });
+            const env = { ...process.env, DISPLAY: process.env.DISPLAY || ':99' };
+            const child = exec(command, { env });
 
             // Logs
             child.stdout.on('data', (data) => {

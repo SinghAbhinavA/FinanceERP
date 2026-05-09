@@ -3,7 +3,7 @@ pipeline {
     agent any
 
     environment {
-        DISPLAY = ':0'
+       
         SIKULI_DIR = "${WORKSPACE}/JNLP.sikuli"
         JAVA_HOME = '/usr/lib/jvm/java-21-openjdk-amd64'
         PATH = "${JAVA_HOME}/bin:${PATH}"
@@ -34,14 +34,6 @@ pipeline {
                     echo "Workspace: $WORKSPACE"
                     ls -la $WORKSPACE
                     ls -la $WORKSPACE/JNLP.sikuli || echo "JNLP.sikuli NOT FOUND"
-                '''
-            }
-        }
-
-        stage('Install Java Web Start') {
-            steps {
-                sh '''
-                    apt-get update && apt-get install -y icedtea-netx
                 '''
             }
         }
