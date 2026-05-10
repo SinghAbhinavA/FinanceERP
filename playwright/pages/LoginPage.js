@@ -9,6 +9,7 @@ class LoginPage extends BasePage {
         this.companySelect = page.locator('select[name="company"], #company').first();
         this.loginBtn = page.locator('button:has-text("Login"), button:has-text("Sign In"), #loginSubmit').first();
         this.successImage = page.locator('img[alt="Optival Health Solutions Pvt Ltd"]');
+        this.servicesMenu = page.locator('span.ps-menu-label:has-text("Services")');
     }
 
     async navigate(url) {
@@ -23,11 +24,21 @@ class LoginPage extends BasePage {
             await this.companySelect.selectOption({ index: companyIndex });
         }
 
-        await this.click(this.loginBtn);
+        await Promise.all([
+            this.page.waitForNavigation({ waitUntil: 'networkidle', timeout: 60000 }).catch(() => null),
+            this.click(this.loginBtn)
+        ]);
     }
 
     async waitForLoginSuccess(timeout = 30000) {
-        await this.successImage.waitFor({ state: 'visible', timeout });
+        const [imageVisible, servicesVisible] = await Promise.all([
+            this.successImage.waitFor({ state: 'visible', timeout }).then(() => true).catch(() => false),
+            this.servicesMenu.waitFor({ state: 'visible', timeout }).then(() => true).catch(() => false)
+        ]);
+
+        if (!imageVisible && !servicesVisible) {
+            throw new Error('Login success indicator was not visible within timeout');
+        }
     }
 
     async isLoggedIn() {

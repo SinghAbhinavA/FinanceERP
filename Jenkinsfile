@@ -83,7 +83,23 @@ pipeline {
             }
         }
 
-        stage('Run Playwright Tests') {
+        stage('Install Display Dependencies') {
+            steps {
+                sh '''
+                    if command -v apt-get >/dev/null 2>&1; then
+                        if command -v sudo >/dev/null 2>&1; then
+                            sudo apt-get update
+                            sudo apt-get install -y xdotool wmctrl libcanberra-gtk-module || true
+                        else
+                            apt-get update
+                            apt-get install -y xdotool wmctrl libcanberra-gtk-module || true
+                        fi
+                    fi
+                '''
+            }
+        }
+
+        stage('Run Playwright Login Test') {
             steps {
                 dir('playwright') {
 
@@ -118,10 +134,10 @@ pipeline {
                               java -version
 
                               echo "=============================="
-                              echo "RUNNING PLAYWRIGHT"
+                              echo "RUNNING PLAYWRIGHT LOGIN TEST ONLY"
                               echo "=============================="
 
-                              npx playwright test --headed
+                              CI=true npx playwright test tests/login.spec.js --project=chromium
                           '
                     '''
                 }

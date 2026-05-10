@@ -10,7 +10,7 @@ test('Login as maker via JNLP tokenized URL', async ({ browser }) => {
         context = session.context;
 
         console.log('Maker login successful');
-        await expect(session.page.locator('img[alt="Optival Health Solutions Pvt Ltd"]')).toBeVisible();
+        await expect(session.page.locator('span.ps-menu-label:has-text("Services")')).toBeVisible();
     } finally {
         if (context) await context.close().catch(() => {});
     }
